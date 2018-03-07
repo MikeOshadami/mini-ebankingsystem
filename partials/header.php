@@ -4,7 +4,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<title>Startmin - Bootstrap Admin Theme</title>
+<title>ebanking Project- Ife Ibidun</title>
 <link href="css/bootstrap.min.css" rel="stylesheet">
 
 <!-- Custom CSS -->

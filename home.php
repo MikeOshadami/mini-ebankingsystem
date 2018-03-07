@@ -1,3 +1,16 @@
+<?php
+session_start();
+if(!isset($_SESSION['user_session']))
+{
+header("Location: index.php");
+}
+include_once 'dbconfig.php';
+
+$stmt = $db_con->prepare("SELECT * FROM users WHERE user_id=:uid");
+$stmt->execute(array(":uid"=>$_SESSION['user_session']));
+$row=$stmt->fetch(PDO::FETCH_ASSOC);
+
+?>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -14,7 +27,7 @@
             <div id="page-wrapper">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h1 class="page-header">Welcome John Doe</h1>
+                        <h1 class="page-header">Welcome <?php echo $row['user_name']; ?></h1>
                     </div>
                     <!-- /.col-lg-12 -->
                 </div>
