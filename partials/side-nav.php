@@ -9,7 +9,7 @@
 
             </li>
             <li>
-                <a href="forms.html"><i class="fa fa-edit fa-fw"></i> Payment</a>
+                <a href="#"><i class="fa fa-edit fa-fw"></i> Payment</a>
             </li>
             <li>
                 <a href="#"><i class="fa fa-wrench fa-fw"></i> Transfer<span class="fa arrow"></span></a>
