@@ -7,9 +7,7 @@ if(!isset($_SESSION['user_session']))
 include_once 'dbconfig.php';
 include_once 'scripts/functions.php';
 $userId = $_SESSION['user_session'];
-$stmt = $db_con->prepare("SELECT * FROM users WHERE user_id=:uid");
-$stmt->execute(array(":uid"=>$_SESSION['user_session']));
-$row=$stmt->fetch(PDO::FETCH_ASSOC);
+$userDetails = getUserDetails($db_con, $userId);
 $getTotalWithDrawal = getTotalWithDrawal($db_con, $userId);
 $getTotalCredit = getTotalCredit($db_con, $userId);
 $getAvailableBalance = $getTotalCredit - $getTotalWithDrawal;
@@ -30,7 +28,7 @@ $miniStatements = getMiniStatement($db_con, $userId);
   <div id="page-wrapper">
     <div class="row">
       <div class="col-lg-12">
-        <h1 class="page-header">Welcome <?php echo $row['user_name']; ?></h1>
+        <h1 class="page-header">Welcome <?php echo $userDetails['user_name']; ?></h1>
       </div>
       <!-- /.col-lg-12 -->
     </div>
@@ -115,8 +113,7 @@ $miniStatements = getMiniStatement($db_con, $userId);
       </div>
       <!-- /.col-lg-8 -->
       <div class="col-lg-4">
-        <img src="images/ebanking_sidebar.jpg" alt="Ebanking Banner" />
-        <img src="images/ebanking_sidebar.jpg" alt="Ebanking Banner" />
+          <?php include  'partials/right-sidebar.php'; ?>
       </div>
       <!-- /.col-lg-4 -->
     </div>

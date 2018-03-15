@@ -34,11 +34,26 @@ function getMiniStatement($db_con, $userId){
     return  $rows;
 }
 
+function getFullStatement($db_con, $userId){
+    $accountNumber = getCustomerAccountNumber($db_con, $userId);
+    $stmt = $db_con->prepare("SELECT amount, transactionDate, narration, DRCR FROM instanttransactiontlog i where i.toAccount=:accountNumber || i.fromAccount=:accountNumber");
+    $stmt->execute(array(":accountNumber" => $accountNumber));
+    $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    return  $rows;
+}
+
 function getCustomerAccountNumber($db_con, $userId){
     $stmt = $db_con->prepare("SELECT * FROM accounts WHERE userid=:uid");
     $stmt->execute(array(":uid"=>$userId));
     $row=$stmt->fetch(PDO::FETCH_ASSOC);
     $accountNumber = $row['accountNumber'];
     return $accountNumber;
+}
+
+function getUserDetails($db_con, $userId){
+    $stmt = $db_con->prepare("SELECT * FROM users WHERE user_id=:uid");
+    $stmt->execute(array(":uid"=>$userId));
+    $row=$stmt->fetch(PDO::FETCH_ASSOC);
+    return $row;
 }
 ?>
