@@ -1,5 +1,5 @@
 <div class="navbar-header">
-  <a class="navbar-brand" href="home.php">eBanking Project</a>
+  <a class="navbar-brand" href="home.php">Babcock eBanking Project</a>
 </div>
 
 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">

@@ -7,11 +7,8 @@ if(!isset($_SESSION['user_session']))
 include_once 'dbconfig.php';
 include_once 'scripts/functions.php';
 $userId = $_SESSION['user_session'];
-$miniStatements = getFullStatement($db_con, $userId);
+$transferHistorys = getTransferHistory($db_con, $userId);
 $userDetails = getUserDetails($db_con, $userId);
-$getTotalWithDrawal = getTotalWithDrawal($db_con, $userId);
-$getTotalCredit = getTotalCredit($db_con, $userId);
-$getAvailableBalance = $getTotalCredit - $getTotalWithDrawal;
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -28,7 +25,7 @@ $getAvailableBalance = $getTotalCredit - $getTotalWithDrawal;
   <div id="page-wrapper">
     <div class="row">
       <div class="col-lg-12">
-        <h1 class="page-header">Account Summary</h1>
+        <h1 class="page-header">Transfer History</h1>
       </div>
       <!-- /.col-lg-12 -->
     </div>
@@ -40,15 +37,14 @@ $getAvailableBalance = $getTotalCredit - $getTotalWithDrawal;
           <tr>
             <th>Transaction Date</th>
             <th>Description</th>
-            <th>Deposit</th>
-            <th>Withdrawal</th>
+            <th>Amount</th>
           </tr>
-            <?php foreach ($miniStatements as $statement) { ?>
+            <?php foreach ($transferHistorys as $statement) { ?>
           <tr>
             <td><?php echo  date("m/d/y g:i A",strtotime(str_replace('/','-',$statement['transactionDate']))); ?></td>
-            <td><?php echo $statement['narration']; ?></td>
-            <td><?php if($statement['DRCR']=='CR'){	echo number_format($statement['amount'],2);} else {	echo "0.00";} ?></td>
-            <td><?php if($statement['DRCR']=='DR'){	echo number_format($statement['amount'],2);} else {	echo "0.00";} ?></td>
+			  <td><?php echo $statement['narration']; ?></td>
+            <td><?php echo number_format($statement['amount'],2) ?></td>
+          
           </tr>
             <?php } ?>
         </table>

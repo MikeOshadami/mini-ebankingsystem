@@ -123,7 +123,8 @@ $miniStatements = getMiniStatement($db_con, $userId);
 
 </div>
 
-<script src="js/startmin.js"></script>
+
 <?php include  'partials/footer.php'; ?>
+
 </body>
 </html>
